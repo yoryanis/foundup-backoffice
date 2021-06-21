@@ -1,0 +1,167 @@
+<h2 mat-dialog-title>
+  {{ userDataCopy?.id ? "Editar" : "Crear" }} administrador(a)
+</h2>
+<mat-divider></mat-divider>
+<form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="pt-3 pb-2 mh-100">
+    <div class="row pb-2">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Identificación</mat-label>
+          <input
+            matInput
+            minlength="7"
+            maxlength="10"
+            formControlName="identification"
+            required
+          />
+          <mat-error *ngIf="f.identification.hasError('required')">
+            El número de identificación es requerido.
+          </mat-error>
+          <mat-error *ngIf="f.identification.hasError('minlength')">
+            La longitud debe ser mayor o igual a 7.
+          </mat-error>
+          <mat-error *ngIf="f.identification.hasError('pattern')">
+            Se permite solo números para la identificación.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Rol</mat-label>
+          <input matInput formControlName="rol" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="name" placeholder="Joe" required />
+          <mat-error *ngIf="f.name.hasError('required')">
+            El nombre es requerido.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="lastname" placeholder="Smith" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad</mat-label>
+          <mat-select formControlName="city" required>
+            <mat-option>Seleccione ciudad</mat-option>
+            <ng-container *ngFor="let city of cities | enum">
+              <mat-option [value]="city.value">
+                {{ city.value | titlecase }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="f.city.hasError('required')">
+            La ciudad es requerida.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Dirección</mat-label>
+          <input
+            matInput
+            formControlName="address"
+            placeholder="Street Springfield # 5"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline" class="example-form-field">
+          <mat-label>Fecha de cumpleaños</mat-label>
+          <input
+            matInput
+            formControlName="birthdate"
+            [matDatepicker]="datepicker"
+            placeholder="dd / mm / yyyy"
+            [max]="maxDate"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="datepicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancelar</button>
+              <button mat-raised-button color="primary" matDatepickerApply>
+                Aplicar
+              </button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="phone" placeholder="333 222 1100" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pb-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Correo electrónico</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="usuario@email.com"
+            required
+          />
+          <mat-error *ngIf="f.email.hasError('required')">
+            La dirección de correo electrónico es requerida.
+          </mat-error>
+          <mat-error *ngIf="f.email.hasError('email')">
+            El formato de dirección de correo electrónico es incorrecta.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Ocupación</mat-label>
+          <mat-select formControlName="occupation">
+            <mat-option>Seleccione ocupación</mat-option>
+            <ng-container *ngFor="let occupation of occupations | enum">
+              <mat-option [value]="occupation.value">
+                {{ occupation.value | titlecase }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row" *ngIf="userDataCopy?.id">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            placeholder="***********"
+            type="password"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-divider></mat-divider>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button mat-raised-button color="primary" cdkFocusInitial>
+      {{ userDataCopy?.id ? "Editar" : "Crear" }}
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,60 @@
+<div class="container container-main">
+  <div class="d-flex justify-content-center">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <mat-card class="example-card mt-5">
+        <mat-card-header>
+          <mat-card-title>Iniciar sesión</mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <mat-card-content>
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  placeholder="usuario@mail.com"
+                />
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-error *ngIf="f.email.hasError('required')">
+                  La dirección de correo electrónico es requerida.
+                </mat-error>
+                <mat-error *ngIf="f.email.hasError('email')">
+                  El formato de dirección de correo electrónico es incorrecta
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input
+                  matInput
+                  formControlName="password"
+                  placeholder="***********"
+                  type="password"
+                />
+                <mat-icon matSuffix>password</mat-icon>
+                <mat-error *ngIf="f.password.hasError('required')">
+                  La contraseña es requerida.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="pt-1 pb-2 text-center">
+            <button mat-raised-button [disabled]="loading" color="primary">
+              Iniciar sesión
+              <img
+                src="../../../assets/loading.gif"
+                class="m-l-2"
+                *ngIf="loading"
+                alt="Cargando"
+              />
+            </button>
+          </mat-card-actions>
+        </form>
+        <mat-divider></mat-divider>
+        <p class="text-muted pt-3">v. 0.0.2 beta</p>
+      </mat-card>
+    </div>
+  </div>
+</div>

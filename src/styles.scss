@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+.container-main {
+  margin-top: 100px;
+  margin-bottom: 40px;
+}
+
+mat-form-field {
+  width: 100%;
+}

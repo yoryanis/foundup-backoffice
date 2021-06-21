@@ -1,0 +1,31 @@
+<div class="toolbar" role="banner">
+  <img
+    style="cursor: pointer"
+    src="../../../assets/logo.png"
+    alt="Found Up"
+    (click)="goToHome()"
+    width="130"
+  />
+  <div class="spacer"></div>
+  <a
+    aria-label="Inicio"
+    routerLink="/home/reports"
+    matTooltip="Inicio"
+    matTooltipPosition="above"
+    class="label-menu"
+  >
+    <mat-icon>home</mat-icon>
+  </a>
+  <p class="label-menu">|</p>
+  <button mat-button [matMenuTriggerFor]="beforeMenu" class="label-menu">
+    @{{ userInfo?.name | titlecase }}
+  </button>
+  <mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item routerLink="/settings/profile">
+      <mat-icon>account_circle</mat-icon> Mi perfil
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon> Cerrar sesión
+    </button>
+  </mat-menu>
+</div>

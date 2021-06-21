@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Eliminar administrador(a)</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="pt-3 pb-2 mh-100">
+  <div class="row pb-2">
+    <h3 class="fw-bold">
+      ¿Está seguro que desea eliminar a @{{ removeData.data?.name | titlecase }}
+      del sistema?
+    </h3>
+    <p>
+      Al <b>aceptar</b> la eliminación, NO podrá recuperarlo porque será
+      eliminado permanentemente.
+    </p>
+  </div>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-button
+    mat-raised-button
+    color="warn"
+    (click)="onRemove()"
+    cdkFocusInitial
+  >
+    Aceptar
+  </button>
+</mat-dialog-actions>

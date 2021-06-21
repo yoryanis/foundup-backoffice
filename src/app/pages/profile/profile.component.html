@@ -1,0 +1,38 @@
+<block-ui>
+  <app-navbar></app-navbar>
+  <div class="container container-main">
+    <h2 class="text-muted">Configuraciones</h2>
+    <mat-divider></mat-divider>
+    <p class="text-muted pt-2">
+      Es esta área podrá modificar sus datos de usuario, crear nuevos
+      administradores del sistema y gestionar las categorías del sistema.
+    </p>
+    <nav mat-tab-nav-bar>
+      <a
+        mat-tab-link
+        [routerLink]="['/settings/profile']"
+        routerLinkActive
+        #rla1="routerLinkActive"
+        [active]="rla1.isActive"
+        >Perfil
+      </a>
+      <a
+        mat-tab-link
+        [routerLink]="['/settings/admin']"
+        routerLinkActive
+        #rla2="routerLinkActive"
+        [active]="rla2.isActive"
+        >Administrador(a)
+      </a>
+      <a
+        mat-tab-link
+        [routerLink]="['/settings/categories']"
+        routerLinkActive
+        #rla3="routerLinkActive"
+        [active]="rla3.isActive"
+        >Categorías
+      </a>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</block-ui>

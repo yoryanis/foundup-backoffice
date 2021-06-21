@@ -1,0 +1,29 @@
+<block-ui>
+  <app-navbar></app-navbar>
+  <div class="container container-main">
+    <div class="row">
+      <app-welcome></app-welcome>
+    </div>
+    <div class="row mt-4 mb-5">
+      <nav mat-tab-nav-bar>
+        <a
+          mat-tab-link
+          [routerLink]="['/home/reports']"
+          routerLinkActive
+          #rla1="routerLinkActive"
+          [active]="rla1.isActive"
+          >Reporte
+        </a>
+        <a
+          mat-tab-link
+          [routerLink]="['/home/reports-graphics']"
+          routerLinkActive
+          #rla2="routerLinkActive"
+          [active]="rla2.isActive"
+          >Gráficas
+        </a>
+      </nav>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</block-ui>

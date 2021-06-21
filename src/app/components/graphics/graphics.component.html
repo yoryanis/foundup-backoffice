@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card class="mt-3">
+        <mat-card-header>
+          <mat-card-title>Reportados / Encontrados</mat-card-title>
+          <mat-card-subtitle>
+            <div class="row">
+              <div class="col-md-9">
+                Reporte gráfico de todos los objetos encontrados y reportados
+                por los usuarios de la plataforma a lo largo del tiempo.
+              </div>
+              <div class="col-md-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Año</mat-label>
+                  <mat-select
+                    appearance="outline"
+                    [(ngModel)]="year_current"
+                    (selectionChange)="changeYard($event)"
+                  >
+                    <ng-container *ngFor="let year of years">
+                      <mat-option [value]="year">{{ year }}</mat-option>
+                    </ng-container>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="display: block">
+            <canvas
+              baseChart
+              width="400"
+              height="200"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+            ></canvas>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-divider></mat-divider>
+          <p class="text-muted text-end pt-2">
+            <small>
+              Valores en tiempo real.
+              <span class="fw-bold"
+                >Total registros: {{ count_lineal }}</span
+              ></small
+            >
+          </p>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <mat-card class="mt-5">
+        <mat-card-header>
+          <mat-card-title>Ciudades</mat-card-title>
+          <mat-card-subtitle>
+            Reporte gráfico de las ciudades donde los usuarios han hecho su
+            reporte de objeto perdido.
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="display: block">
+            <canvas
+              baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+            >
+            </canvas>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-divider></mat-divider>
+          <p class="text-muted text-end pt-2">
+            <small>
+              Valores en tiempo real.
+              <span class="fw-bold"
+                >Total registros: {{ count_bar }}</span
+              ></small
+            >
+          </p>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-md-6">
+      <mat-card class="mt-5">
+        <mat-card-header>
+          <mat-card-title>Categorías</mat-card-title>
+          <mat-card-subtitle>
+            Reporte gráfico de las categorías más reportadas por los usuarios.
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="chart">
+            <canvas
+              baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [colors]="pieChartColors"
+              [legend]="pieChartLegend"
+            >
+            </canvas>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-divider></mat-divider>
+          <p class="text-muted text-end pt-2">
+            <small>
+              Valores en tiempo real.
+              <span class="fw-bold"
+                >Total registros: {{ count_circle }}</span
+              ></small
+            >
+          </p>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

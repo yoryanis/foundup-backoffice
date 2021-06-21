@@ -1,0 +1,253 @@
+<div class="container-fluid mt-3 mb-3">
+  <div class="row">
+    <mat-card class="example-card col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <mat-card-header>
+        <mat-card-title
+          ><h2 class="text-muted">
+            <small>Editar perfil</small>
+          </h2>
+        </mat-card-title>
+      </mat-card-header>
+      <div class="row pt-2 pb-3">
+        <mat-divider style="width: 98%; margin-left: 1%"></mat-divider>
+      </div>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+          <div class="row mb-3">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+              <mat-form-field appearance="outline">
+                <mat-label>Identificación</mat-label>
+                <input
+                  matInput
+                  class="text-center"
+                  formControlName="identification"
+                />
+                <mat-hint
+                  >El número de identificación no se puede editar por razones de
+                  seguridad y estabilidad en la plataforma.</mat-hint
+                >
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Nombres</mat-label>
+                <input
+                  matInput
+                  formControlName="name"
+                  placeholder="Joe"
+                  required
+                />
+                <mat-error *ngIf="f.name.hasError('required')">
+                  El nombre es requerido.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Apellidos</mat-label>
+                <input
+                  matInput
+                  formControlName="lastname"
+                  placeholder="Smith"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Ciudad</mat-label>
+                <mat-select formControlName="city" required>
+                  <mat-option>Seleccione ciudad</mat-option>
+                  <ng-container *ngFor="let city of cities | enum">
+                    <mat-option [value]="city.value">
+                      {{ city.value | titlecase }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+                <mat-error *ngIf="f.city.hasError('required')">
+                  La ciudad es requerida.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Dirección</mat-label>
+                <input
+                  matInput
+                  formControlName="address"
+                  placeholder="Street Springfield # 5"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline" class="example-form-field">
+                <mat-label>Fecha de cumpleaños</mat-label>
+                <input
+                  matInput
+                  formControlName="birthdate"
+                  [matDatepicker]="datepicker"
+                  placeholder="dd / mm / yyyy"
+                  [max]="maxDate"
+                  required
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="datepicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancelar</button>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      matDatepickerApply
+                    >
+                      Aplicar
+                    </button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input
+                  matInput
+                  formControlName="phone"
+                  placeholder="333 222 1100"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  placeholder="usuario@email.com"
+                  required
+                />
+                <mat-error *ngIf="f.email.hasError('required')">
+                  La dirección de correo electrónico es requerida.
+                </mat-error>
+                <mat-error *ngIf="f.email.hasError('email')">
+                  El formato de dirección de correo electrónico es incorrecta
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Ocupación</mat-label>
+                <mat-select formControlName="occupation">
+                  <mat-option>Seleccione ocupación</mat-option>
+                  <ng-container *ngFor="let occupation of occupations | enum">
+                    <mat-option [value]="occupation.value">
+                      {{ occupation.value | titlecase }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <p>
+                <span class="fw-bold"
+                  >Estado:
+                  <span *ngIf="user?.state; else inactive" class="text-success"
+                    >Activo</span
+                  ><ng-template #inactive class="text-danger"
+                    >Inactivo</ng-template
+                  ></span
+                >
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="pt-1 pb-2">
+          <mat-divider style="width: 98%; margin-left: 1%"></mat-divider>
+          <button mat-raised-button color="primary" class="mt-3">
+            <mat-icon>mode_edit</mat-icon> Editar
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+
+  <div class="row mt-5">
+    <mat-card class="example-card col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <mat-card-header>
+        <mat-card-title
+          ><h2 class="text-muted">
+            <small>Actualizar contraseña</small>
+          </h2>
+        </mat-card-title>
+      </mat-card-header>
+      <div class="row pt-2 pb-3">
+        <mat-divider style="width: 98%; margin-left: 1%"></mat-divider>
+      </div>
+      <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword()">
+        <mat-card-content>
+          <div class="row">
+            <p>
+              Para cambiar la contraseña se debe comprobar con la contraseña
+              anterior registrada
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Contraseña actual</mat-label>
+                <input
+                  matInput
+                  formControlName="confirmPassword"
+                  placeholder="**********"
+                  type="password"
+                  required
+                />
+                <mat-error *ngIf="g.confirmPassword.hasError('required')">
+                  La contraseña actual es requerida.
+                </mat-error>
+                <mat-error *ngIf="g.confirmPassword.errors?.mustMatch">
+                  Las contraseñas no coinciden
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Contraseña nueva</mat-label>
+                <input
+                  matInput
+                  formControlName="password"
+                  placeholder="**********"
+                  type="password"
+                  minlength="6"
+                  required
+                />
+                <mat-error *ngIf="g.password.hasError('required')">
+                  La nueva contraseña es requerida.
+                </mat-error>
+                <mat-error *ngIf="g.password.hasError('minlength')">
+                  La longitud debe ser mayor o igual a 6.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="pt-1 pb-2">
+          <mat-divider style="width: 98%; margin-left: 1%"></mat-divider>
+          <button mat-raised-button color="primary" class="mt-3">
+            <mat-icon>mode_edit</mat-icon> Cambiar contraseña
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+</div>

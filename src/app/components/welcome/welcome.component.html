@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <h1 class="fw-bold text-muted">
+    <span
+      >{{ getHour().time }}, @{{ userInfo?.name | titlecase }}
+      <mat-icon
+        style="color: yellow"
+        *ngIf="getHour().iconTime === 2"
+        matTooltip="Mañana"
+        matTooltipPosition="right"
+        >brightness_7</mat-icon
+      >
+      <mat-icon
+        style="color: gold"
+        *ngIf="getHour().iconTime === 0"
+        matTooltip="Tarde"
+        matTooltipPosition="right"
+        >light_mode</mat-icon
+      >
+      <mat-icon
+        style="color: darkblue"
+        *ngIf="getHour().iconTime === 1"
+        matTooltip="Noche"
+        matTooltipPosition="right"
+        >nightlight_round</mat-icon
+      >
+    </span>
+  </h1>
+</div>

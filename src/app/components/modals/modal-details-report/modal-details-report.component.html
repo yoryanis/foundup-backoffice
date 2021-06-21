@@ -1,0 +1,76 @@
+<h2 mat-dialog-title>
+  Detalles del objeto {{ reportData.accessory.name | titlecase }}
+</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content class="mh-100">
+  <div class="row mt-3 mb-2 text-muted">
+    <div class="col-md-8">
+      <h4>Identificador: {{ reportData.accessory.id_unique }}</h4>
+      <p><b>Detalles: </b>{{ reportData.accessory.description | titlecase }}</p>
+      <p class="pt-1">
+        <b>Fecha de reporte:</b>
+        {{ reportData.accessory.lost_date | date: "medium" }} <br />
+        <b
+          >Tiempo transcurrido:
+          <span class="text-danger">
+            {{ getTime(reportData.accessory.lost_date) }}</span
+          ></b
+        >
+      </p>
+      <p class="pt-1">
+        <b>Ciudad de reporte: </b>{{ reportData.accessory.lost_place }}
+      </p>
+      <p class="pt-1">
+        <b>Recompensa establecida: $ </b
+        ><span *ngIf="reportData.accessory.reward === null; else reward">0</span
+        ><ng-template #reward>{{ reportData.accessory.reward }}</ng-template>
+      </p>
+      <p class="pt-1">
+        <b>Categoría: </b>{{ reportData.accessory.category.category | titlecase }}
+      </p>
+    </div>
+    <div class="col-md-4">
+      <figure>
+        <img
+          src="{{ reportData.accessory.qr }}"
+          alt="Identificador"
+          width="200"
+        />
+        <figcaption>QR Identificador único del objeto</figcaption>
+      </figure>
+    </div>
+  </div>
+  <mat-divider class="pb-2"></mat-divider>
+  <div class="row text-muted">
+    <div class="col-md-6">
+      <p class="pt-1">
+        <b>Identificación propietario: </b
+        >{{ reportData.userOwner.identification }}
+      </p>
+      <p class="pt-1">
+        <b>Membresía desde: </b
+        >{{ reportData.userOwner.createdAt | date: "medium" }}
+      </p>
+      <p class="pt-1">
+        <b>Ciudad origen: </b>{{ reportData.userOwner.city | titlecase }}
+      </p>
+    </div>
+    <div class="col-md-6">
+      <p class="pt-1">
+        <b>Usuario propietario: </b>{{ reportData.userOwner.name | titlecase }}
+        {{ reportData.userOwner.lastname | titlecase }}
+      </p>
+      <p class="pt-1"><b>Correo: </b>{{ reportData.userOwner.email }}</p>
+      <p class="pt-1">
+        <b>Teléfono: </b>{{ reportData.userOwner.phone | titlecase }}
+      </p>
+      <p class="pt-1">
+        <b>Dirección: </b>{{ reportData.userOwner.address | titlecase }}
+      </p>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>
